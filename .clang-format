@@ -1,0 +1,15 @@
+﻿---
+BasedOnStyle: Microsoft
+AlignAfterOpenBracket: Align
+FixNamespaceComments: 'true'
+IncludeBlocks: Preserve
+IndentCaseLabels: 'true'
+PointerAlignment: Left
+SpacesInParentheses: 'true'
+Standard: Cpp11
+TabWidth: '4'
+UseTab: Always
+AlwaysBreakTemplateDeclarations: true
+AllowShortIfStatementsOnASingleLine: true
+AccessModifierOffset: -4
+...

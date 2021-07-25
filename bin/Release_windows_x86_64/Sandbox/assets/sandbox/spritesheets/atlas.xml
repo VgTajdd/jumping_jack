@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sprites>
+    <sprite n="4.PNG" x="0" y="0" w="477" h="350" a="atlas.png"/>
+    <sprite n="2.PNG" x="477" y="0" w="335" h="253" a="atlas.png"/>
+    <sprite n="5.PNG" x="0" y="350" w="195" h="214" a="atlas.png"/>
+    <sprite n="1.PNG" x="195" y="350" w="198" h="195" a="atlas.png"/>
+    <sprite n="8.PNG" x="393" y="350" w="79" h="147" a="atlas.png"/>
+    <sprite n="3.PNG" x="472" y="350" w="134" h="133" a="atlas.png"/>
+    <sprite n="6.PNG" x="606" y="350" w="107" h="110" a="atlas.png"/>
+    <sprite n="9.PNG" x="713" y="350" w="80" h="57" a="atlas.png"/>
+    <sprite n="7.PNG" x="477" y="253" w="67" h="59" a="atlas.png"/>
+</sprites>
+<spritesheets>
+    <atlas a="atlas.png" w="812" h="564"/>
+</spritesheets>
