@@ -1,0 +1,11 @@
+.vs/
+bin_intermediate/
+bin/
+
+*.user
+*.ini
+*.log
+*.vcxproj
+*.filters
+*.sln
+*.json
