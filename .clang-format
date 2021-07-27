@@ -12,4 +12,7 @@ UseTab: Always
 AlwaysBreakTemplateDeclarations: true
 AllowShortIfStatementsOnASingleLine: true
 AccessModifierOffset: -4
+BraceWrapping:
+  SplitEmptyFunction: false
+BreakConstructorInitializers: BeforeComma
 ...
