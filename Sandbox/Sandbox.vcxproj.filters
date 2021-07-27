@@ -9,11 +9,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\Game.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\core\GameContext.cpp" />
+    <ClCompile Include="src\scene\SceneManager.cpp" />
+    <ClCompile Include="src\scene\GameScene.cpp" />
+    <ClCompile Include="src\scene\MainMenu.cpp" />
+    <ClCompile Include="src\scene\SceneFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\resources.rc">
       <Filter>resources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\scene\Scene.h" />
+    <ClInclude Include="src\core\GameContext.h" />
+    <ClInclude Include="src\scene\GameScene.h" />
+    <ClInclude Include="src\scene\Hud.h" />
+    <ClInclude Include="src\scene\SceneManager.h" />
+    <ClInclude Include="src\scene\SceneType.h" />
+    <ClInclude Include="src\scene\MainMenu.h" />
+    <ClInclude Include="src\scene\SceneFactory.h" />
   </ItemGroup>
 </Project>

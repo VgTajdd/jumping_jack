@@ -39,7 +39,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>UVR_DYNAMIC_LINK;UVR_RELEASE;UVR_UI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Univer\vendor\spdlog\include;..\Univer\vendor\glm;..\Univer\vendor\rapidxml-1.13;..\Univer\vendor\univerAudio\include;..\Univer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\;..\Univer\vendor\spdlog\include;..\Univer\vendor\glm;..\Univer\vendor\rapidxml-1.13;..\Univer\vendor\univerAudio\include;..\Univer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -66,10 +66,25 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\Game.cpp" />
+    <ClCompile Include="src\scene\MainMenu.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\core\GameContext.cpp" />
+    <ClCompile Include="src\scene\GameScene.cpp" />
+    <ClCompile Include="src\scene\SceneFactory.cpp" />
+    <ClCompile Include="src\scene\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\scene\MainMenu.h" />
+    <ClInclude Include="src\core\GameContext.h" />
+    <ClInclude Include="src\scene\GameScene.h" />
+    <ClInclude Include="src\scene\Hud.h" />
+    <ClInclude Include="src\scene\Scene.h" />
+    <ClInclude Include="src\scene\SceneFactory.h" />
+    <ClInclude Include="src\scene\SceneManager.h" />
+    <ClInclude Include="src\scene\SceneType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
