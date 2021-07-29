@@ -17,16 +17,17 @@ void GameContext::init( univer::Layer* layer )
 	layer->setMouseEventsEnabled( true );
 	layer->setKeyboardEventsEnabled( true );
 
-	m_sceneManager = new SceneManager( layer );
-	m_sceneManager->gotoScene( SCENE_TYPE::MAIN_MENU );
+	SceneManager::Get()->setLayer( layer );
+	SceneManager::Get()->init();
+	SceneManager::Get()->gotoScene( SCENE_TYPE::MAIN_MENU );
 }
 
 void GameContext::clear( univer::Layer* layer )
 {
-	delete m_sceneManager;
+	SceneManager::Get()->clear();
 }
 
 void GameContext::update( univer::Layer* layer, const univer::Timestep& ts )
 {
-	m_sceneManager->update( ts );
+	SceneManager::Get()->update( ts );
 }

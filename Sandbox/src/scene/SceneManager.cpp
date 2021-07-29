@@ -8,15 +8,17 @@
 
 using univer::Sprite;
 
-SceneManager::SceneManager( univer::Layer* layer )
+SceneManager* SceneManager::Get()
+{
+	static SceneManager instance;
+	return &instance;
+}
+
+SceneManager::SceneManager()
 	: m_currentScene( nullptr )
 	, m_canvas( nullptr )
-	, m_layer( layer )
-{
-	m_canvas = new Sprite( 0, 0, 640, 480 );
-	m_canvas->setColor( 1, 1, 1 );
-	m_layer->add( m_canvas );
-}
+	, m_layer( nullptr )
+{}
 
 void SceneManager::gotoScene( SCENE_TYPE type )
 {
@@ -44,4 +46,13 @@ void SceneManager::clear()
 	m_layer->remove( m_canvas );
 	delete m_canvas;
 	m_canvas = nullptr;
+}
+
+void SceneManager::init()
+{
+	if ( m_layer == nullptr ) UVR_ERROR( "Set a layer before init SceneManager." );
+
+	m_canvas = new Sprite( 0, 0, 640, 480 );
+	m_canvas->setColor( 1, 1, 1 );
+	m_layer->add( m_canvas );
 }
