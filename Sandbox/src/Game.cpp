@@ -10,6 +10,8 @@ public:
 	explicit Game()
 		: univer::Application( "Game" )
 	{
+		univer::AssetManager::GetInstance().loadAssetGroup( "sandbox" );
+
 		SET_CLIENT_LOG_VERBOSITY( ::univer::VERBOSITY_LEVEL::L_INFO );
 		SET_CORE_LOG_VERBOSITY( ::univer::VERBOSITY_LEVEL::L_INFO );
 
