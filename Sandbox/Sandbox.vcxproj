@@ -66,17 +66,20 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\world\Player.cpp" />
     <ClCompile Include="src\scene\MainMenu.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\core\GameContext.cpp" />
     <ClCompile Include="src\scene\GameScene.cpp" />
     <ClCompile Include="src\scene\SceneFactory.cpp" />
     <ClCompile Include="src\scene\SceneManager.cpp" />
+    <ClCompile Include="src\world\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\world\Player.h" />
     <ClInclude Include="src\scene\MainMenu.h" />
     <ClInclude Include="src\core\GameContext.h" />
     <ClInclude Include="src\scene\GameScene.h" />
@@ -85,6 +88,8 @@
     <ClInclude Include="src\scene\SceneFactory.h" />
     <ClInclude Include="src\scene\SceneManager.h" />
     <ClInclude Include="src\scene\SceneType.h" />
+    <ClInclude Include="src\world\Actor.h" />
+    <ClInclude Include="src\world\World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
