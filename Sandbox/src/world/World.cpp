@@ -6,6 +6,11 @@ World::World()
 	: m_player{ std::make_shared<Player>() }
 {}
 
+void World::init()
+{
+	m_player->setWorld( shared_from_this() );
+}
+
 void World::update( float dt )
 {
 	for ( auto& actor : m_actors )

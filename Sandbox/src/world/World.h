@@ -13,7 +13,7 @@ class KeyReleasedEvent;
 } // namespace univer
 
 // Class for actors, player and objects.
-class World
+class World : public std::enable_shared_from_this<World>
 {
 public:
 	explicit World();
