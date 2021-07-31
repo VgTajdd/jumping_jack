@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Scene.h"
+#include <world/World.h>
+
+#include <memory>
 
 namespace univer
 {
@@ -18,4 +21,6 @@ public:
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );
 	void onKeyReleasedEvent( univer::KeyReleasedEvent& e );
 
+private:
+	std::shared_ptr<World> m_world;
 };
