@@ -5,6 +5,8 @@ namespace univer
 class Layer;
 class Timestep;
 class Sprite;
+class KeyPressedEvent;
+class KeyReleasedEvent;
 } // namespace univer
 
 enum class SCENE_TYPE;
@@ -21,6 +23,8 @@ public:
 	void gotoScene( SCENE_TYPE type );
 	void clear();
 	void init();
+	void onKeyPressedEvent( univer::KeyPressedEvent& e );
+	void onKeyReleasedEvent( univer::KeyReleasedEvent& e );
 
 private:
 	class Scene* m_currentScene;

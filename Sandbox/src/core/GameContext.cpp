@@ -14,7 +14,7 @@ GameContext::~GameContext()
 
 void GameContext::init( univer::Layer* layer )
 {
-	layer->setMouseEventsEnabled( true );
+	layer->setMouseEventsEnabled( false );
 	layer->setKeyboardEventsEnabled( true );
 
 	SceneManager::Get()->setLayer( layer );
@@ -30,4 +30,14 @@ void GameContext::clear( univer::Layer* layer )
 void GameContext::update( univer::Layer* layer, const univer::Timestep& ts )
 {
 	SceneManager::Get()->update( ts );
+}
+
+void GameContext::onKeyPressedEvent( univer::Layer* layer, univer::KeyPressedEvent& e )
+{
+	SceneManager::Get()->onKeyPressedEvent( e );
+}
+
+void GameContext::onKeyReleasedEvent( univer::Layer* layer, univer::KeyReleasedEvent& e )
+{
+	SceneManager::Get()->onKeyReleasedEvent( e );
 }

@@ -11,3 +11,15 @@ void GameScene::update( float dt )
 
 void GameScene::init()
 {}
+GameScene::~GameScene()
+{}
+
+void GameScene::onKeyPressedEvent( univer::KeyPressedEvent& e )
+{
+	m_world->onKeyPressedEvent( e );
+}
+
+void GameScene::onKeyReleasedEvent( univer::KeyReleasedEvent& e )
+{
+	m_world->onKeyReleasedEvent( e );
+}

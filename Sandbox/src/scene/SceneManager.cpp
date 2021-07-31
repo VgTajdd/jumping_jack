@@ -56,3 +56,13 @@ void SceneManager::init()
 	m_canvas->setColor( 1, 1, 1 );
 	m_layer->add( m_canvas );
 }
+
+void SceneManager::onKeyPressedEvent( univer::KeyPressedEvent& e )
+{
+	m_currentScene->onKeyPressedEvent( e );
+}
+
+void SceneManager::onKeyReleasedEvent( univer::KeyReleasedEvent& e )
+{
+	m_currentScene->onKeyReleasedEvent( e );
+}

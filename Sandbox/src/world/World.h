@@ -6,6 +6,12 @@
 #include <memory>
 #include <vector>
 
+namespace univer
+{
+class KeyPressedEvent;
+class KeyReleasedEvent;
+} // namespace univer
+
 // Class for actors, player and objects.
 class World
 {
