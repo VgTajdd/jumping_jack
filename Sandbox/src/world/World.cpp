@@ -1,5 +1,11 @@
 #include "World.h"
 
+#include "Player.h"
+
+World::World()
+	: m_player{ std::make_shared<Player>() }
+{}
+
 void World::update( float dt )
 {
 	for ( auto& actor : m_actors )

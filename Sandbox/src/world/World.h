@@ -16,13 +16,13 @@ class KeyReleasedEvent;
 class World
 {
 public:
-	explicit World()
-		: m_player{ std::make_unique<Player>() } {};
+	explicit World();
+	void init();
 	void update( float dt );
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );
 	void onKeyReleasedEvent( univer::KeyReleasedEvent& e );
 
 private:
 	std::vector<Actor> m_actors;
-	std::unique_ptr<Player> m_player;
+	std::shared_ptr<Player> m_player;
 };
