@@ -8,7 +8,7 @@
 class World;
 
 // Generic class for actors in the world.
-class Actor
+class Actor : public std::enable_shared_from_this<Actor>
 {
 public:
 	// Use this method to create components.
