@@ -9,13 +9,14 @@ World::World()
 void World::init()
 {
 	m_player->setWorld( shared_from_this() );
+	m_player->init();
 }
 
 void World::update( float dt )
 {
 	for ( auto& actor : m_actors )
 	{
-		actor.update( dt );
+		actor->update( dt );
 	}
 }
 

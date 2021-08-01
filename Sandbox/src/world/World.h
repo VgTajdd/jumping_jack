@@ -23,6 +23,6 @@ public:
 	void onKeyReleasedEvent( univer::KeyReleasedEvent& e );
 
 private:
-	std::vector<Actor> m_actors;
+	std::vector<std::shared_ptr<Actor>> m_actors;
 	std::shared_ptr<Player> m_player;
 };
