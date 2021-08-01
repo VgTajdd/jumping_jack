@@ -17,6 +17,16 @@ public:
 	// Update components.
 	virtual void update( float dt ){};
 
+	void setWorld( const std::weak_ptr<World>& world )
+	{
+		m_world = world;
+	}
+
+	const std::weak_ptr<World>& world() const
+	{
+		return m_world;
+	}
+
 	template <typename T>
 	std::shared_ptr<T> getComponent()
 	{
@@ -37,5 +47,6 @@ public:
 	}
 
 private:
+	std::weak_ptr<World> m_world;
 	std::vector<std::shared_ptr<Component>> m_components;
 };
