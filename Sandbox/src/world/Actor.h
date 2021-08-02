@@ -42,6 +42,7 @@ public:
 	std::shared_ptr<T> addComponent( Args&&... args )
 	{
 		auto v = m_components.emplace_back( std::move( std::make_shared<T>( args... ) ) );
+		v->set_actor( shared_from_this() );
 		return std::dynamic_pointer_cast<T>( v );
 	}
 
