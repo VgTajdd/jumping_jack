@@ -12,6 +12,7 @@ void GameScene::update( float dt )
 
 void GameScene::init()
 {
+	m_world->setCanvas( m_canvas );
 	m_world->init();
 }
 

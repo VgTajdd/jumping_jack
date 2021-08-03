@@ -4,6 +4,7 @@
 
 World::World()
 	: m_player{ std::make_shared<Player>() }
+	, m_canvas{ nullptr }
 {}
 
 void World::init()
@@ -18,6 +19,7 @@ void World::update( float dt )
 	{
 		actor->update( dt );
 	}
+	m_player->update( dt );
 }
 
 void World::onKeyPressedEvent( univer::KeyPressedEvent& e )
