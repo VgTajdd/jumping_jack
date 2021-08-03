@@ -8,7 +8,9 @@ GameScene::GameScene()
 }
 
 void GameScene::update( float dt )
-{}
+{
+	m_world->update( dt );
+}
 
 void GameScene::init()
 {
