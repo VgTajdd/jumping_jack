@@ -66,6 +66,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\world\component\CMotionController.cpp" />
+    <ClCompile Include="src\world\component\CSkin.cpp" />
     <ClCompile Include="src\world\Player.cpp" />
     <ClCompile Include="src\scene\MainMenu.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -79,6 +81,10 @@
     <ResourceCompile Include="resources\resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\world\component\CPosition.h" />
+    <ClInclude Include="src\world\component\CMotionController.h" />
+    <ClInclude Include="src\world\component\Component.h" />
+    <ClInclude Include="src\world\component\CSkin.h" />
     <ClInclude Include="src\world\Player.h" />
     <ClInclude Include="src\scene\MainMenu.h" />
     <ClInclude Include="src\core\GameContext.h" />

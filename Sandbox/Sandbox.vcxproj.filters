@@ -17,6 +17,8 @@
     <ClCompile Include="src\scene\SceneFactory.cpp" />
     <ClCompile Include="src\world\World.cpp" />
     <ClCompile Include="src\world\Player.cpp" />
+    <ClCompile Include="src\world\component\CMotionController.cpp" />
+    <ClCompile Include="src\world\component\CSkin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\resources.rc">
@@ -35,5 +37,9 @@
     <ClInclude Include="src\world\World.h" />
     <ClInclude Include="src\world\Actor.h" />
     <ClInclude Include="src\world\Player.h" />
+    <ClInclude Include="src\world\component\Component.h" />
+    <ClInclude Include="src\world\component\CMotionController.h" />
+    <ClInclude Include="src\world\component\CPosition.h" />
+    <ClInclude Include="src\world\component\CSkin.h" />
   </ItemGroup>
 </Project>
