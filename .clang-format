@@ -1,6 +1,13 @@
 ﻿---
-BasedOnStyle: Microsoft
+AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
+AlignEscapedNewlines: Left
+AllowShortIfStatementsOnASingleLine: true
+AlwaysBreakTemplateDeclarations: true
+BasedOnStyle: Microsoft
+BraceWrapping:
+  SplitEmptyFunction: false
+BreakConstructorInitializers: BeforeComma
 FixNamespaceComments: 'true'
 IncludeBlocks: Preserve
 IndentCaseLabels: 'true'
@@ -9,10 +16,4 @@ SpacesInParentheses: 'true'
 Standard: Cpp11
 TabWidth: '4'
 UseTab: Always
-AlwaysBreakTemplateDeclarations: true
-AllowShortIfStatementsOnASingleLine: true
-AccessModifierOffset: -4
-BraceWrapping:
-  SplitEmptyFunction: false
-BreakConstructorInitializers: BeforeComma
 ...
