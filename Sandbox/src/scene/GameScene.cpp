@@ -19,7 +19,9 @@ void GameScene::init()
 }
 
 GameScene::~GameScene()
-{}
+{
+	m_world.reset();
+}
 
 void GameScene::onKeyPressedEvent( univer::KeyPressedEvent& e )
 {
