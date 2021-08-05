@@ -19,6 +19,7 @@ class CStateMachine : public Component
 {
 	virtual void evaluateConditions()
 	{
+		if ( !existConditions( m_state ) ) return;
 		const auto& conditions{ getConditions( m_state ) };
 		for ( const auto& [finalState, condition, action] : conditions )
 		{
@@ -30,6 +31,14 @@ class CStateMachine : public Component
 			}
 		}
 	}
+	bool existConditions( int initialState ) const
+	{
+		return m_conditions.find( initialState ) != m_conditions.end();
+	}
+	const std::vector<StateTransition>& getConditions( int initialState ) const
+	{
+		return m_conditions.at( initialState );
+	}
 
 public:
 	void update( float dt )
@@ -40,10 +49,6 @@ public:
 					   const std::function<void( void )>& coaction )
 	{
 		m_conditions[initialState].push_back( { finalState, condition, coaction } );
-	}
-	const std::vector<StateTransition>& getConditions( int initialState ) const
-	{
-		return m_conditions.at( initialState );
 	}
 
 public:
