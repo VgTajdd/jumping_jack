@@ -39,6 +39,7 @@
     <ClInclude Include="src\world\Player.h" />
     <ClInclude Include="src\world\component\Component.h" />
     <ClInclude Include="src\world\component\CMotionController.h" />
+    <ClInclude Include="src\world\component\CStateMachine.h" />
     <ClInclude Include="src\world\component\CPosition.h" />
     <ClInclude Include="src\world\component\CSkin.h" />
   </ItemGroup>
