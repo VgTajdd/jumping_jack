@@ -7,7 +7,7 @@
 #include <map>
 #include <vector>
 
-// Abstract class that implements a state machine system.
+// Abstract class that implements a state machine.
 class CStateMachine : public Component
 {
 public:
@@ -44,7 +44,7 @@ private:
 	}
 
 public:
-	void update( float dt )
+	void update( float dt ) override
 	{
 		evaluateEdges();
 	}

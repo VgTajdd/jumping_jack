@@ -2,7 +2,7 @@
 
 #include "CStateMachine.h"
 
-// Player's behavior system.
+// Player's behavior manager.
 class CPlayerStateMachine : public CStateMachine
 {
 	void stand();

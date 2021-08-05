@@ -34,17 +34,6 @@ void Player::init()
 	sm->init();
 }
 
-void Player::update( float dt )
-{
-	auto& sm{ getComponent<CPlayerStateMachine>() };
-	auto& mc{ getComponent<CMotionController>() };
-	auto& skin{ getComponent<CSkin>() };
-
-	sm->update( dt );
-	mc->update( dt );
-	skin->update( dt );
-}
-
 void Player::onKeyPressedEvent( univer::KeyPressedEvent& e )
 {
 	processKeyInput( e.GetKeyCode(), true );

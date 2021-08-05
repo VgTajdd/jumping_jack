@@ -19,19 +19,20 @@ public:                               \
 private:                              \
 	type m_##var;
 
-#define DEFINE_GET_COMPONENT_INSTANCE( Type )                              \
+#define DEFINE_GET_COMPONENT_INSTANCE( Type )                                     \
 	static std::shared_ptr<Type> get##Type( const std::shared_ptr<Actor>& actor ) \
-	{                                                                      \
-		static std::shared_ptr<Type> instance;                             \
-		if ( instance.get() == nullptr )                                   \
-		{                                                                  \
-			instance = actor->getComponent<Type>();                        \
-		}                                                                  \
-		return instance;                                                   \
+	{                                                                             \
+		static std::shared_ptr<Type> instance;                                    \
+		if ( instance.get() == nullptr )                                          \
+		{                                                                         \
+			instance = actor->getComponent<Type>();                               \
+		}                                                                         \
+		return instance;                                                          \
 	}
 
 #define GET_COMPONENT_INSTANCE( Type ) get##Type( actor() )
 
+// Generic class for components.
 class Component
 {
 public:

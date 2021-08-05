@@ -15,8 +15,7 @@ class Player : public Actor
 {
 public:
 	explicit Player();
-	void init();
-	void update( float dt );
+	void init() override;
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );
 	void onKeyReleasedEvent( univer::KeyReleasedEvent& e );
 

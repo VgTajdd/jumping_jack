@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <vector>
 
 #include "world/component/Component.h"
@@ -9,12 +10,22 @@ class World;
 // Generic class for actors in the world.
 class Actor : public std::enable_shared_from_this<Actor>
 {
+	// Update components.
+	void updateComponents( float dt )
+	{
+		std::for_each( m_components.begin(), m_components.end(),
+					   [dt]( const auto& component ) { component->update( dt ); } );
+	}
+
 public:
-	// Use this method to create components.
+	// Use this function to create components (override).
 	virtual void init(){};
 
-	// Update components.
-	virtual void update( float dt ){};
+	// Override this function only if it's necessary.
+	virtual void update( float dt )
+	{
+		updateComponents( dt );
+	}
 
 	void setWorld( const std::weak_ptr<World>& world )
 	{
