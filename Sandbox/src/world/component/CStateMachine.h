@@ -7,21 +7,24 @@
 #include <map>
 #include <vector>
 
-struct StateTransition
-{
-	int finalState;
-	std::function<bool( void )> condition;
-	std::function<void( void )> action;
-};
-
 // Abstract class that implements a state machine system.
 class CStateMachine : public Component
 {
-	virtual void evaluateConditions()
+public:
+	struct Edge
 	{
-		if ( !existConditions( m_state ) ) return;
-		const auto& conditions{ getConditions( m_state ) };
-		for ( const auto& [finalState, condition, action] : conditions )
+		int initialState;
+		int finalState;
+		std::function<bool( void )> condition;
+		std::function<void( void )> action;
+	};
+
+private:
+	virtual void evaluateEdges()
+	{
+		if ( !areThereEdges( m_state ) ) return;
+		const auto& conditions{ getEdges( m_state ) };
+		for ( const auto& [initialState, finalState, condition, action] : conditions )
 		{
 			if ( condition() )
 			{
@@ -31,30 +34,30 @@ class CStateMachine : public Component
 			}
 		}
 	}
-	bool existConditions( int initialState ) const
+	bool areThereEdges( int initialState ) const
 	{
-		return m_conditions.find( initialState ) != m_conditions.end();
+		return m_edges.find( initialState ) != m_edges.end();
 	}
-	const std::vector<StateTransition>& getConditions( int initialState ) const
+	const std::vector<Edge>& getEdges( int initialState ) const
 	{
-		return m_conditions.at( initialState );
+		return m_edges.at( initialState );
 	}
 
 public:
 	void update( float dt )
 	{
-		evaluateConditions();
+		evaluateEdges();
 	}
-	void addCondition( int initialState, int finalState, const std::function<bool( void )>& condition,
-					   const std::function<void( void )>& coaction )
+	void addEdge( int initialState, int finalState, const std::function<bool( void )>& condition,
+				  const std::function<void( void )>& coaction )
 	{
-		m_conditions[initialState].push_back( { finalState, condition, coaction } );
+		m_edges[initialState].push_back( { initialState, finalState, condition, coaction } );
 	}
 
 public:
 	virtual void init() = 0;
 
 private:
-	std::map<int, std::vector<StateTransition>> m_conditions;
+	std::map<int, std::vector<Edge>> m_edges;
 	ADD_PROPERTY( int, state )
 };

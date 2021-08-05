@@ -10,19 +10,19 @@ DEFINE_GET_COMPONENT_INSTANCE( CMotionController )
 void CPlayerStateMachine::init()
 {
 	set_state( states::ST_STAND );
-	addCondition(
+	addEdge(
 		states::ST_STAND, states::ST_WALK, [this]() { return moveToRightEnabled() || moveToLeftEnabled(); },
 		[this]() { walk(); } );
-	addCondition(
+	addEdge(
 		states::ST_WALK, states::ST_STAND, [this]() { return !moveToRightEnabled() && !moveToLeftEnabled(); },
 		[this]() { stand(); } );
-	addCondition(
+	addEdge(
 		states::ST_WALK, states::ST_WALK, [this]() { return m_flip; }, [this]() { walk(); } );
-	addCondition(
+	addEdge(
 		states::ST_WALK, states::ST_JUMPING, [this]() { return jumpEnabled(); }, [this]() { jump(); } );
-	addCondition(
+	addEdge(
 		states::ST_STAND, states::ST_JUMPING, [this]() { return jumpEnabled(); }, [this]() { jump(); } );
-	addCondition(
+	addEdge(
 		states::ST_JUMPING, states::ST_STAND, [this] { return verticalMovementCompleted(); }, [this]() { stand(); } );
 }
 
