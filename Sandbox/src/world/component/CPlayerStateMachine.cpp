@@ -14,8 +14,8 @@ void CPlayerStateMachine::init()
 		states::ST_STAND, states::ST_WALK, [this]() { return moveToRightEnabled() || moveToLeftEnabled(); },
 		[this]() { walk(); } );
 	addEdge(
-		states::ST_WALK, states::ST_STAND, [this]() { return !moveToRightEnabled() && !moveToLeftEnabled(); },
-		[this]() { stand(); } );
+		states::ST_WALK, states::ST_STAND,
+		[this]() { return !moveToRightEnabled() && !moveToLeftEnabled() && !jumpEnabled(); }, [this]() { stand(); } );
 	addEdge(
 		states::ST_WALK, states::ST_WALK, [this]() { return m_flip; }, [this]() { walk(); } );
 	addEdge(
