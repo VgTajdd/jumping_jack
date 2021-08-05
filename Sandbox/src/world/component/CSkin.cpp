@@ -44,7 +44,7 @@ void CSkin::reset()
 		m_sprite = new univer::Sprite();
 		m_sprite->setColor( m_color );
 		m_sprite->setSize( m_size );
-		m_sprite->setCenter( m_size.x * .5, m_size.y );
+		m_sprite->setCenter( m_size.x / 2, m_size.y );
 		canvas->addChild( m_sprite );
 	}
 }

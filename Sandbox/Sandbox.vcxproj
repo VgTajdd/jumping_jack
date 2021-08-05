@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClInclude Include="src\world\component\CPlayerStateMachine.h" />
     <ClInclude Include="src\data\Constants.h" />
+    <ClInclude Include="src\world\component\CCollision.h" />
     <ClInclude Include="src\world\component\CPosition.h" />
     <ClInclude Include="src\world\component\CMotionController.h" />
     <ClInclude Include="src\world\component\Component.h" />
