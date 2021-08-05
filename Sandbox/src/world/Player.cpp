@@ -1,6 +1,8 @@
 #include "Player.h"
+#include "data/Constants.h"
 
 #include "component/CMotionController.h"
+#include "component/CPlayerStateMachine.h"
 #include "component/CPosition.h"
 #include "component/CSkin.h"
 
@@ -14,21 +16,26 @@ void Player::init()
 	auto& mc = addComponent<CMotionController>();
 	auto& position = addComponent<CPosition>();
 	auto& skin = addComponent<CSkin>();
+	auto& sm = addComponent<CPlayerStateMachine>();
 
 	// Setup components.
-	mc->set_speedX( 10 );
-	position->set_x( 200 );
-	position->set_y( 200 );
-	skin->set_color( { 1, 1, 0, 1 } );
-	skin->set_size( { 50, 50 } );
+	mc->set_speedX( constants::PLAYER_SPEED_X );
+	mc->set_speedY( constants::PLAYER_SPEED_Y );
+	position->set_x( 320 );
+	position->set_y( 480 );
+	skin->set_color( { 1, 0, 0, 1 } );
+	skin->set_size( { 25, 40 } );
 	skin->reset();
+	sm->init();
 }
 
 void Player::update( float dt )
 {
-	auto& mc = getComponent<CMotionController>();
-	auto& skin = getComponent<CSkin>();
+	auto& sm{ getComponent<CPlayerStateMachine>() };
+	auto& mc{ getComponent<CMotionController>() };
+	auto& skin{ getComponent<CSkin>() };
 
+	sm->update( dt );
 	mc->update( dt );
 	skin->update( dt );
 }
@@ -45,20 +52,20 @@ void Player::onKeyReleasedEvent( univer::KeyReleasedEvent& e )
 
 void Player::processKeyInput( const univer::KeyCode& keyCode, bool pressed )
 {
-	auto& mc = getComponent<CMotionController>();
+	auto& sm = getComponent<CPlayerStateMachine>();
 	switch ( keyCode )
 	{
 		case univer::KeyCode::Left:
 		case univer::KeyCode::A:
-			mc->moveToLeft( pressed );
+			sm->moveToLeft( pressed );
 			break;
 		case univer::KeyCode::Right:
 		case univer::KeyCode::D:
-			mc->moveToRight( pressed );
+			sm->moveToRight( pressed );
 			break;
 		case univer::KeyCode::Up:
 		case univer::KeyCode::W:
-			if ( pressed ) mc->goUp();
+			if ( pressed ) sm->jump();
 			break;
 	}
 }

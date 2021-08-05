@@ -19,6 +19,7 @@
     <ClCompile Include="src\world\Player.cpp" />
     <ClCompile Include="src\world\component\CMotionController.cpp" />
     <ClCompile Include="src\world\component\CSkin.cpp" />
+    <ClCompile Include="src\world\component\CPlayerStateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\resources.rc">
@@ -44,5 +45,6 @@
     <ClInclude Include="src\world\component\CSkin.h" />
     <ClInclude Include="src\data\Stats.h" />
     <ClInclude Include="src\data\Constants.h" />
+    <ClInclude Include="src\world\component\CPlayerStateMachine.h" />
   </ItemGroup>
 </Project>

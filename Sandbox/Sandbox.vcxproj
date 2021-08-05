@@ -67,6 +67,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\world\component\CMotionController.cpp" />
+    <ClCompile Include="src\world\component\CPlayerStateMachine.cpp" />
     <ClCompile Include="src\world\component\CSkin.cpp" />
     <ClCompile Include="src\world\Player.cpp" />
     <ClCompile Include="src\scene\MainMenu.cpp" />
@@ -81,6 +82,7 @@
     <ResourceCompile Include="resources\resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\world\component\CPlayerStateMachine.h" />
     <ClInclude Include="src\data\Constants.h" />
     <ClInclude Include="src\world\component\CPosition.h" />
     <ClInclude Include="src\world\component\CMotionController.h" />
