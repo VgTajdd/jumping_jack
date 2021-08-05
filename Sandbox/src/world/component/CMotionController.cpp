@@ -7,19 +7,16 @@ DEFINE_GET_COMPONENT_INSTANCE( CPosition )
 
 void CMotionController::moveToLeft( bool on )
 {
-	if ( m_motionFactorX > 0 && !on ) return;
 	m_motionFactorX = on ? -1 : 0;
 }
 
 void CMotionController::moveToRight( bool on )
 {
-	if ( m_motionFactorX < 0 && !on ) return;
 	m_motionFactorX = on ? 1 : 0;
 }
 
 void CMotionController::jump( bool on )
 {
-	m_motionFactorX = 0;
 	m_inJump = on;
 }
 
