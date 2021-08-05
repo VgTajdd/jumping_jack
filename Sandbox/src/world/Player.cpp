@@ -24,7 +24,7 @@ void Player::init()
 	mc->set_speedX( constants::PLAYER_SPEED_X );
 	mc->set_speedY( constants::PLAYER_SPEED_Y );
 	position->set_x( 320 );
-	position->set_y( 480 );
+	position->set_y( 475 );
 	skin->set_color( { 1, 0, 0, 1 } );
 	skin->set_size( { 25, 40 } );
 	skin->reset();
@@ -68,7 +68,7 @@ void Player::processKeyInput( const univer::KeyCode& keyCode, bool pressed )
 			break;
 		case univer::KeyCode::Up:
 		case univer::KeyCode::W:
-			if ( pressed ) sm->jump();
+			if ( pressed ) sm->tryJump();
 			break;
 	}
 }

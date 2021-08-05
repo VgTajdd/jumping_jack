@@ -18,23 +18,30 @@ void CPlayerStateMachine::init()
 		[this]() { stand(); } );
 	addCondition(
 		states::ST_WALK, states::ST_WALK, [this]() { return m_flip; }, [this]() { walk(); } );
+	addCondition(
+		states::ST_WALK, states::ST_JUMPING, [this]() { return jumpEnabled(); }, [this]() { jump(); } );
+	addCondition(
+		states::ST_STAND, states::ST_JUMPING, [this]() { return jumpEnabled(); }, [this]() { jump(); } );
+	addCondition(
+		states::ST_JUMPING, states::ST_STAND, [this] { return verticalMovementCompleted(); }, [this]() { stand(); } );
 }
 
 void CPlayerStateMachine::walk()
 {
-	auto& sm{ GET_COMPONENT_INSTANCE( CMotionController ) };
-	sm->moveToLeft( false );
-	sm->moveToRight( false );
-	if ( moveToLeftEnabled() ) sm->moveToLeft( true );
-	if ( moveToRightEnabled() ) sm->moveToRight( true );
+	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	mc->moveToLeft( false );
+	mc->moveToRight( false );
+	if ( moveToLeftEnabled() ) mc->moveToLeft( true );
+	if ( moveToRightEnabled() ) mc->moveToRight( true );
 	m_flip = false;
 }
 
 void CPlayerStateMachine::stand()
 {
-	auto& sm{ GET_COMPONENT_INSTANCE( CMotionController ) };
-	sm->moveToLeft( false );
-	sm->moveToRight( false );
+	set_jumpEnabled( false );
+	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	mc->moveToLeft( false );
+	mc->moveToRight( false );
 }
 
 void CPlayerStateMachine::moveToLeft( bool on )
@@ -59,5 +66,31 @@ void CPlayerStateMachine::moveToRight( bool on )
 	}
 }
 
+void CPlayerStateMachine::tryJump()
+{
+	set_moveToLeftEnabled( false );
+	set_moveToRightEnabled( false );
+	set_jumpEnabled( true );
+}
+
 void CPlayerStateMachine::jump()
-{}
+{
+	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	mc->moveToLeft( false );
+	mc->moveToRight( false );
+	mc->moveVertically( -55 );
+}
+
+void CPlayerStateMachine::fall()
+{
+	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	mc->moveToLeft( false );
+	mc->moveToRight( false );
+	mc->moveVertically( 55 );
+}
+
+bool CPlayerStateMachine::verticalMovementCompleted()
+{
+	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	return mc->verticalMovementCompleted();
+}
