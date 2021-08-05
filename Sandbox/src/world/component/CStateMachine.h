@@ -14,6 +14,7 @@ struct StateTransition
 	std::function<void( void )> action;
 };
 
+// Abstract class that implements a state machine system.
 class CStateMachine : public Component
 {
 	virtual void evaluateConditions()

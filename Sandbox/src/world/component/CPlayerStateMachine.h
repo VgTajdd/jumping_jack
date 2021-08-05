@@ -2,15 +2,14 @@
 
 #include "CStateMachine.h"
 
+// Player's behavior system.
 class CPlayerStateMachine : public CStateMachine
 {
-public:
-	void init();
 	void stand();
 	void walk();
 
 public:
-	// External interaction (events).
+	void init() override;
 	void moveToLeft( bool on );
 	void moveToRight( bool off );
 	void jump();
