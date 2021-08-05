@@ -42,5 +42,7 @@
     <ClInclude Include="src\world\component\CStateMachine.h" />
     <ClInclude Include="src\world\component\CPosition.h" />
     <ClInclude Include="src\world\component\CSkin.h" />
+    <ClInclude Include="src\data\Stats.h" />
+    <ClInclude Include="src\data\Constants.h" />
   </ItemGroup>
 </Project>

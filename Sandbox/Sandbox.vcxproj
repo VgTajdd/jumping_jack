@@ -81,6 +81,7 @@
     <ResourceCompile Include="resources\resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\data\Constants.h" />
     <ClInclude Include="src\world\component\CPosition.h" />
     <ClInclude Include="src\world\component\CMotionController.h" />
     <ClInclude Include="src\world\component\Component.h" />
@@ -95,6 +96,7 @@
     <ClInclude Include="src\scene\SceneManager.h" />
     <ClInclude Include="src\scene\SceneType.h" />
     <ClInclude Include="src\world\Actor.h" />
+    <ClInclude Include="src\data\Stats.h" />
     <ClInclude Include="src\world\World.h" />
     <ClInclude Include="src\world\component\CStateMachine.h" />
   </ItemGroup>
