@@ -9,6 +9,8 @@
 
 #include <univer/events/KeyEvent.h>
 
+DEFINE_GET_COMPONENT_INSTANCE( CPlayerStateMachine )
+
 Player::Player()
 {}
 
@@ -55,7 +57,7 @@ void Player::onKeyReleasedEvent( univer::KeyReleasedEvent& e )
 
 void Player::processKeyInput( const univer::KeyCode& keyCode, bool pressed )
 {
-	auto& sm = getComponent<CPlayerStateMachine>();
+	auto& sm = getCPlayerStateMachine( shared_from_this() );
 	switch ( keyCode )
 	{
 		case univer::KeyCode::Left:
