@@ -34,6 +34,7 @@ void CPlayerStateMachine::walk()
 	if ( moveToLeftEnabled() ) mc->moveToLeft( true );
 	if ( moveToRightEnabled() ) mc->moveToRight( true );
 	m_flip = false;
+	UVR_INFO( "Walk" );
 }
 
 void CPlayerStateMachine::stand()
@@ -42,6 +43,25 @@ void CPlayerStateMachine::stand()
 	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
 	mc->moveToLeft( false );
 	mc->moveToRight( false );
+	UVR_INFO( "Stand" );
+}
+
+void CPlayerStateMachine::jump()
+{
+	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	mc->moveToLeft( false );
+	mc->moveToRight( false );
+	mc->moveVertically( -55 );
+	UVR_INFO( "Jump" );
+}
+
+void CPlayerStateMachine::fall()
+{
+	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	mc->moveToLeft( false );
+	mc->moveToRight( false );
+	mc->moveVertically( 55 );
+	UVR_INFO( "Fall" );
 }
 
 void CPlayerStateMachine::moveToLeft( bool on )
@@ -71,22 +91,6 @@ void CPlayerStateMachine::tryJump()
 	set_moveToLeftEnabled( false );
 	set_moveToRightEnabled( false );
 	set_jumpEnabled( true );
-}
-
-void CPlayerStateMachine::jump()
-{
-	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
-	mc->moveToLeft( false );
-	mc->moveToRight( false );
-	mc->moveVertically( -55 );
-}
-
-void CPlayerStateMachine::fall()
-{
-	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
-	mc->moveToLeft( false );
-	mc->moveToRight( false );
-	mc->moveVertically( 55 );
 }
 
 bool CPlayerStateMachine::verticalMovementCompleted()
