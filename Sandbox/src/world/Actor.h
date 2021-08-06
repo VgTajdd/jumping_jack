@@ -37,6 +37,16 @@ public:
 		return m_world;
 	}
 
+	bool valid() const
+	{
+		return m_valid;
+	}
+
+	void setValid( bool valid )
+	{
+		m_valid = valid;
+	}
+
 	template <typename T>
 	std::shared_ptr<T> getComponent()
 	{
@@ -60,4 +70,5 @@ public:
 private:
 	std::weak_ptr<World> m_world;
 	std::vector<std::shared_ptr<Component>> m_components;
+	bool m_valid = true;
 };

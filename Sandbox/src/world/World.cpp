@@ -15,10 +15,17 @@ void World::init()
 
 void World::update( float dt )
 {
-	for ( auto& actor : m_actors )
+	std::vector<int> toRemove;
+	for ( size_t i = 0; i < m_actors.size(); i++ )
 	{
-		actor->update( dt );
+		if ( !m_actors[i]->valid() )
+		{
+			toRemove.push_back( i );
+			continue;
+		}
+		m_actors[i]->update( dt );
 	}
+	std::for_each( toRemove.begin(), toRemove.end(), [this]( int i ) { m_actors.erase( m_actors.begin() + i ); } );
 	m_player->update( dt );
 }
 
