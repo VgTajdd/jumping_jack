@@ -23,7 +23,9 @@ public:
 	void update( float dt );
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );
 	void onKeyReleasedEvent( univer::KeyReleasedEvent& e );
+	void addActor( const std::shared_ptr<Actor>& actor );
 
+	const std::shared_ptr<Player>& player() const;
 	univer::Sprite* canvas() const;
 
 private:
@@ -40,4 +42,9 @@ inline void World::setCanvas( univer::Sprite* canvas )
 inline univer::Sprite* World::canvas() const
 {
 	return m_canvas;
+}
+
+inline const std::shared_ptr<Player>& World::player() const
+{
+	return m_player;
 }

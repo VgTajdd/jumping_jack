@@ -31,3 +31,8 @@ void World::onKeyReleasedEvent( univer::KeyReleasedEvent& e )
 {
 	m_player->onKeyReleasedEvent( e );
 }
+
+void World::addActor( const std::shared_ptr<Actor>& actor )
+{
+	m_actors.push_back( actor );
+}
