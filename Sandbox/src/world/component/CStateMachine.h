@@ -42,12 +42,12 @@ private:
 	{
 		return m_edges.at( initialState );
 	}
-
-public:
-	void update( float dt ) override
+	void update( float dt ) final
 	{
 		evaluateEdges();
 	}
+
+public:
 	void addEdge( int initialState, int finalState, const std::function<bool( void )>& condition,
 				  const std::function<void( void )>& coaction )
 	{
