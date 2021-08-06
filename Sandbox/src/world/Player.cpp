@@ -2,7 +2,7 @@
 #include "data/Constants.h"
 
 #include "component/CCollision.h"
-#include "component/CMotionController.h"
+#include "component/CPlayerMotionController.h"
 #include "component/CPlayerStateMachine.h"
 #include "component/CPosition.h"
 #include "component/CSkin.h"
@@ -16,7 +16,7 @@ Player::Player()
 
 void Player::init()
 {
-	auto& mc = addComponent<CMotionController>();
+	auto& mc = addComponent<CPlayerMotionController>();
 	auto& position = addComponent<CPosition>();
 	auto& skin = addComponent<CSkin>();
 	auto& bounds = addComponent<CCollison>();
@@ -25,6 +25,7 @@ void Player::init()
 	// Setup components.
 	mc->set_speedX( constants::PLAYER_SPEED_X );
 	mc->set_speedY( constants::PLAYER_SPEED_Y );
+	mc->set_horizontalLoopEnabled( true );
 	position->set_x( 320 );
 	position->set_y( 475 );
 	skin->set_color( { 1, 0, 0, 1 } );

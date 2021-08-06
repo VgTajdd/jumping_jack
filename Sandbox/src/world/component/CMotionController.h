@@ -6,33 +6,53 @@ struct Displacement
 {
 	int goal;
 	float current;
-	bool enabled;
-	void start( int _goal )
+	bool enabled = false;
+	bool completed = false;
+	int direction = 0;
+	void start( int displacement )
 	{
-		goal = _goal;
+		goal = displacement > 0 ? displacement : -displacement;
+		direction = displacement > 0 ? 1 : -1;
 		current = 0.f;
 		enabled = true;
+		completed = false;
 	}
+	void updateValue( float delta, float& value )
+	{
+		if ( enabled )
+		{
+			current += delta;
+			if ( current > goal )
+			{
+				completed = true;
+				enabled = false;
+				delta = goal - ( current - delta );
+			}
+			value += delta * direction;
+		}
+	};
 };
 
+// Generic Motion Controller component.
 class CMotionController : public Component
 {
 public:
-	void moveToLeft( bool on );
-	void moveToRight( bool on );
 	void moveVertically( int pixels );
+	void moveHorizontally( int pixels );
 	bool verticalMovementCompleted() const
 	{
-		return m_verticalMovementCompleted;
+		return m_verticalDisplacement.completed;
+	};
+	bool horizontalMovementCompleted() const
+	{
+		return m_horizontalDisplacement.completed;
 	};
 
-	void update( float dt );
+	void update( float dt ) override;
 
 private:
-	int m_motionFactorX = 0;
-	int m_motionFactorY = 0;
-	bool m_verticalMovementCompleted = false;
 	Displacement m_verticalDisplacement;
+	Displacement m_horizontalDisplacement;
 
 	ADD_PROPERTY( float, speedX )
 	ADD_PROPERTY( float, speedY )

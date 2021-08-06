@@ -1,11 +1,11 @@
 #include "CPlayerStateMachine.h"
-#include "CMotionController.h"
+#include "CPlayerMotionController.h"
 
 #include <univer/core/Log.h>
 
 #include "world/Actor.h"
 
-DEFINE_GET_COMPONENT_INSTANCE( CMotionController )
+DEFINE_GET_COMPONENT_INSTANCE( CPlayerMotionController )
 
 void CPlayerStateMachine::init()
 {
@@ -28,7 +28,7 @@ void CPlayerStateMachine::init()
 
 void CPlayerStateMachine::walk()
 {
-	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
 	mc->moveToLeft( false );
 	mc->moveToRight( false );
 	if ( moveToLeftEnabled() ) mc->moveToLeft( true );
@@ -40,7 +40,7 @@ void CPlayerStateMachine::walk()
 void CPlayerStateMachine::stand()
 {
 	set_jumpEnabled( false );
-	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
 	mc->moveToLeft( false );
 	mc->moveToRight( false );
 	UVR_INFO( "Stand" );
@@ -48,7 +48,7 @@ void CPlayerStateMachine::stand()
 
 void CPlayerStateMachine::jump()
 {
-	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
 	mc->moveToLeft( false );
 	mc->moveToRight( false );
 	mc->moveVertically( -55 );
@@ -57,7 +57,7 @@ void CPlayerStateMachine::jump()
 
 void CPlayerStateMachine::fall()
 {
-	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
 	mc->moveToLeft( false );
 	mc->moveToRight( false );
 	mc->moveVertically( 55 );
@@ -95,6 +95,6 @@ void CPlayerStateMachine::tryJump()
 
 bool CPlayerStateMachine::verticalMovementCompleted()
 {
-	auto& mc{ GET_COMPONENT_INSTANCE( CMotionController ) };
+	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
 	return mc->verticalMovementCompleted();
 }
