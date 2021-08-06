@@ -2,6 +2,7 @@
 #include "data/Constants.h"
 
 #include "component/CCollision.h"
+#include "component/CInputManager.h"
 #include "component/CPlayerMotionController.h"
 #include "component/CPlayerStateMachine.h"
 #include "component/CPosition.h"
@@ -9,7 +10,7 @@
 
 #include <univer/events/KeyEvent.h>
 
-DEFINE_GET_COMPONENT_INSTANCE( CPlayerStateMachine )
+DEFINE_GET_COMPONENT_INSTANCE( CInputManager )
 
 Player::Player()
 {}
@@ -21,6 +22,7 @@ void Player::init()
 	auto& skin = addComponent<CSkin>();
 	auto& bounds = addComponent<CCollison>();
 	auto& sm = addComponent<CPlayerStateMachine>();
+	auto& im = addComponent<CInputManager>();
 
 	// Setup components.
 	mc->set_speedX( constants::PLAYER_SPEED_X );
@@ -37,30 +39,12 @@ void Player::init()
 
 void Player::onKeyPressedEvent( univer::KeyPressedEvent& e )
 {
-	processKeyInput( e.GetKeyCode(), true );
+	auto& im = getCInputManager( shared_from_this() );
+	im->processKeyInput( e.GetKeyCode(), true );
 }
 
 void Player::onKeyReleasedEvent( univer::KeyReleasedEvent& e )
 {
-	processKeyInput( e.GetKeyCode(), false );
-}
-
-void Player::processKeyInput( const univer::KeyCode& keyCode, bool pressed )
-{
-	auto& sm = getCPlayerStateMachine( shared_from_this() );
-	switch ( keyCode )
-	{
-		case univer::KeyCode::Left:
-		case univer::KeyCode::A:
-			sm->moveToLeft( pressed );
-			break;
-		case univer::KeyCode::Right:
-		case univer::KeyCode::D:
-			sm->moveToRight( pressed );
-			break;
-		case univer::KeyCode::Up:
-		case univer::KeyCode::W:
-			if ( pressed ) sm->tryJump();
-			break;
-	}
+	auto& im = getCInputManager( shared_from_this() );
+	im->processKeyInput( e.GetKeyCode(), false );
 }

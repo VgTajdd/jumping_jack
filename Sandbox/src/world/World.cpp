@@ -15,7 +15,7 @@ void World::init()
 
 void World::update( float dt )
 {
-	std::vector<int> toRemove;
+	std::vector<size_t> toRemove;
 	for ( size_t i = 0; i < m_actors.size(); i++ )
 	{
 		if ( !m_actors[i]->valid() )
@@ -25,7 +25,7 @@ void World::update( float dt )
 		}
 		m_actors[i]->update( dt );
 	}
-	std::for_each( toRemove.begin(), toRemove.end(), [this]( int i ) { m_actors.erase( m_actors.begin() + i ); } );
+	std::for_each( toRemove.begin(), toRemove.end(), [this]( size_t i ) { m_actors.erase( m_actors.begin() + i ); } );
 	m_player->update( dt );
 }
 

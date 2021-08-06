@@ -66,6 +66,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\world\component\CInputManager.cpp" />
     <ClCompile Include="src\world\component\CPlayerMotionController.cpp" />
     <ClCompile Include="src\world\component\CMotionController.cpp" />
     <ClCompile Include="src\world\component\CPlayerStateMachine.cpp" />
@@ -83,6 +84,7 @@
     <ResourceCompile Include="resources\resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\world\component\CInputManager.h" />
     <ClInclude Include="src\world\component\CPlayerMotionController.h" />
     <ClInclude Include="src\world\component\CPlayerStateMachine.h" />
     <ClInclude Include="src\data\Constants.h" />

@@ -9,6 +9,11 @@ DEFINE_GET_COMPONENT_INSTANCE( CPlayerMotionController )
 
 void CPlayerStateMachine::init()
 {
+	set_fallEnabled( false );
+	set_flipEnabled( false );
+	set_jumpEnabled( false );
+	set_moveToLeftEnabled( false );
+	set_moveToRightEnabled( false );
 	set_state( states::ST_STAND );
 	addEdge(
 		states::ST_STAND, states::ST_WALK, [this]() { return moveToRightEnabled() || moveToLeftEnabled(); },
@@ -17,7 +22,7 @@ void CPlayerStateMachine::init()
 		states::ST_WALK, states::ST_STAND,
 		[this]() { return !moveToRightEnabled() && !moveToLeftEnabled() && !jumpEnabled(); }, [this]() { stand(); } );
 	addEdge(
-		states::ST_WALK, states::ST_WALK, [this]() { return m_flip; }, [this]() { walk(); } );
+		states::ST_WALK, states::ST_WALK, [this]() { return flipEnabled(); }, [this]() { walk(); } );
 	addEdge(
 		states::ST_WALK, states::ST_JUMPING, [this]() { return jumpEnabled(); }, [this]() { jump(); } );
 	addEdge(
@@ -33,7 +38,7 @@ void CPlayerStateMachine::walk()
 	mc->moveToRight( false );
 	if ( moveToLeftEnabled() ) mc->moveToLeft( true );
 	if ( moveToRightEnabled() ) mc->moveToRight( true );
-	m_flip = false;
+	m_flipEnabled = false;
 	UVR_INFO( "Walk" );
 }
 
@@ -62,35 +67,6 @@ void CPlayerStateMachine::fall()
 	mc->moveToRight( false );
 	mc->moveVertically( 55 );
 	UVR_INFO( "Fall" );
-}
-
-void CPlayerStateMachine::moveToLeft( bool on )
-{
-	if ( moveToRightEnabled() && !on ) return;
-	set_moveToLeftEnabled( on );
-	if ( moveToRightEnabled() )
-	{
-		set_moveToRightEnabled( false );
-		m_flip = true;
-	}
-}
-
-void CPlayerStateMachine::moveToRight( bool on )
-{
-	if ( moveToLeftEnabled() && !on ) return;
-	set_moveToRightEnabled( on );
-	if ( moveToLeftEnabled() )
-	{
-		set_moveToLeftEnabled( false );
-		m_flip = true;
-	}
-}
-
-void CPlayerStateMachine::tryJump()
-{
-	set_moveToLeftEnabled( false );
-	set_moveToRightEnabled( false );
-	set_jumpEnabled( true );
 }
 
 bool CPlayerStateMachine::verticalMovementCompleted()

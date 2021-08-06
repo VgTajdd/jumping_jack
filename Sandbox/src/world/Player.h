@@ -2,8 +2,6 @@
 
 #include "Actor.h"
 
-#include <univer/constants/KeyCodes.h>
-
 namespace univer
 {
 class KeyPressedEvent;
@@ -18,7 +16,4 @@ public:
 	void init() override;
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );
 	void onKeyReleasedEvent( univer::KeyReleasedEvent& e );
-
-private:
-	void processKeyInput( const univer::KeyCode& keyCode, bool pressed );
 };
