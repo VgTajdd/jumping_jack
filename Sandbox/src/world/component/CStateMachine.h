@@ -42,12 +42,13 @@ private:
 	{
 		return m_edges.at( initialState );
 	}
-	void update( float dt ) final
+
+public:
+	void update( float dt )
 	{
 		evaluateEdges();
 	}
 
-public:
 	void addEdge( int initialState, int finalState, const std::function<bool( void )>& condition,
 				  const std::function<void( void )>& coaction )
 	{

@@ -49,6 +49,7 @@ public:
 	};
 
 	void update( float dt ) override;
+	void stop();
 
 private:
 	Displacement m_verticalDisplacement;

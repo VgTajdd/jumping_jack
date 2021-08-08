@@ -4,7 +4,7 @@
 
 #include <univer/core/URectangle.h>
 
-class CCollison : public Component
+class CCollision : public Component
 {
 	ADD_PROPERTY( univer::URectangle, bounds )
 };

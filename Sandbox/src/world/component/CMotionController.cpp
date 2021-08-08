@@ -25,3 +25,9 @@ void CMotionController::update( float dt )
 	position->set_x( newX );
 	position->set_y( newY );
 }
+
+void CMotionController::stop()
+{
+	m_horizontalDisplacement.enabled = false;
+	m_verticalDisplacement.enabled = false;
+}
