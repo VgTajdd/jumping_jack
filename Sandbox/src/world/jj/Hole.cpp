@@ -1,6 +1,7 @@
 #include "Hole.h"
 
 #include "data/Constants.h"
+#include "data/Stats.h"
 #include "world/component/CCollision.h"
 #include "world/component/CMotionController.h"
 #include "world/component/CPosition.h"
@@ -26,7 +27,7 @@ void Hole::init()
 	position->set_x( m_speedX < 0 ? constants::SCREEN_WIDTH + ( constants::HOLE_WIDHT / 2 ) + 10 : startX );
 	mc->moveHorizontally( m_speedX < 0 ? -displacementX : displacementX );
 
-	skin->set_color( { 1, 1, 1, 1 } );
+	skin->set_color( constants::getLevelColor( stats::Stats::LEVEL ) );
 	skin->set_size( { constants::HOLE_WIDHT, 5 } );
 	skin->reset();
 

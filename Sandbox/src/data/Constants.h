@@ -1,5 +1,7 @@
 #pragma once
 
+#include <univer/core/UTypes.h>
+
 namespace constants
 {
 // Game constants.
@@ -20,10 +22,36 @@ const unsigned int SCREEN_HEIGHT = 480;		 // pixels
 const unsigned int PLATFORM_SEPARATION = 55; // pixels
 const unsigned int HOLE_WIDHT = 80;			 // pixels
 
+const univer::UVec4 LEVEL_COLOR_01{ .8f, .8f, 1.f, 1.f };
+const univer::UVec4 LEVEL_COLOR_02{ .8f, 1.f, 1.f, 1.f };
+const univer::UVec4 LEVEL_COLOR_03{ 1.f, .8f, 1.f, 1.f };
+const univer::UVec4 LEVEL_COLOR_04{ 1.f, 1.f, .8f, 1.f };
+
 static unsigned int getPlatformHeight( int platformLevel )
 {
 	return PLAYER_START_Y - platformLevel * PLATFORM_SEPARATION + 5;
 }
+
+static const univer::UVec4 getLevelColor( int level )
+{
+	int levelColor{ level % 4 };
+	switch ( levelColor )
+	{
+		case 1:
+			return LEVEL_COLOR_01;
+		case 2:
+			return LEVEL_COLOR_02;
+		case 3:
+			return LEVEL_COLOR_03;
+		case 4:
+			return LEVEL_COLOR_04;
+	}
+	return LEVEL_COLOR_01;
+}
+const univer::UVec4 ST_STAND_COLOR{ .2f, .2f, .2f, 1.f };
+const univer::UVec4 ST_WALK_COLOR{ .4f, .4f, .4f, 1.f };
+const univer::UVec4 ST_JUMP_COLOR{ .1f, .5f, .1f, 1.f };
+const univer::UVec4 ST_CRASH_COLOR{ .5f, .1f, .1f, 1.f };
 } // namespace constants
 
 namespace states

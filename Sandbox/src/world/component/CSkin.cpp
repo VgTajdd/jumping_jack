@@ -65,5 +65,6 @@ void CSkin::update( float dt )
 			}
 		}
 		m_sprite->setPosition( position->x(), position->y() );
+		m_sprite->setColor( m_color );
 	}
 }

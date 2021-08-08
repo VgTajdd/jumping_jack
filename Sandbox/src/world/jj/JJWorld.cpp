@@ -1,5 +1,9 @@
 #include "JJWorld.h"
 #include "Platform.h"
+#include "data/Constants.h"
+#include "data/Stats.h"
+
+#include <univer/renderables/2d/Sprite.h>
 
 void JJWorld::init()
 {
@@ -9,4 +13,6 @@ void JJWorld::init()
 	{
 		addActor( std::move( std::make_shared<Platform>( i ) ) );
 	}
+
+	canvas()->setColor( constants::getLevelColor( stats::Stats::LEVEL ) );
 }

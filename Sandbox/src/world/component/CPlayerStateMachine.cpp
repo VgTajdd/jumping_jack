@@ -1,6 +1,7 @@
 #include "CPlayerStateMachine.h"
 #include "CPlayerMotionController.h"
 #include "CPosition.h"
+#include "CSkin.h"
 #include "CSoundManager.h"
 #include "data/Constants.h"
 #include "data/Stats.h"
@@ -19,9 +20,10 @@ void CPlayerStateMachine::init()
 	set_jumpEnabled( false );
 	set_moveToLeftEnabled( false );
 	set_moveToRightEnabled( false );
+	set_state( states::ST_STAND );
+	stand();
 
 	// Walk-Stand
-	set_state( states::ST_STAND );
 	addEdge(
 		states::ST_STAND, states::ST_WALK, [this]() { return moveToRightEnabled() || moveToLeftEnabled(); },
 		[this]() { walk(); } );
@@ -83,6 +85,8 @@ void CPlayerStateMachine::walk()
 	if ( moveToRightEnabled() ) mc->moveToRight( true );
 	m_flipEnabled = false;
 	UVR_INFO( "Walk" );
+	auto& skin{ GET_COMPONENT_INSTANCE( CSkin ) };
+	skin->set_color( constants::ST_WALK_COLOR );
 }
 
 void CPlayerStateMachine::stand()
@@ -92,6 +96,8 @@ void CPlayerStateMachine::stand()
 	mc->moveToLeft( false );
 	mc->moveToRight( false );
 	UVR_INFO( "Stand" );
+	auto& skin{ GET_COMPONENT_INSTANCE( CSkin ) };
+	skin->set_color( constants::ST_STAND_COLOR );
 }
 
 void CPlayerStateMachine::jump()
@@ -102,6 +108,8 @@ void CPlayerStateMachine::jump()
 	mc->moveToRight( false );
 	mc->moveVertically( -55 );
 	UVR_INFO( "Jump" );
+	auto& skin{ GET_COMPONENT_INSTANCE( CSkin ) };
+	skin->set_color( constants::ST_JUMP_COLOR );
 }
 
 void CPlayerStateMachine::endjump()
@@ -119,6 +127,8 @@ void CPlayerStateMachine::fall()
 	mc->moveVertically( 55 );
 	stats::Stats::fall();
 	UVR_INFO( "Fall" );
+	auto& skin{ GET_COMPONENT_INSTANCE( CSkin ) };
+	skin->set_color( constants::ST_CRASH_COLOR );
 }
 
 void CPlayerStateMachine::crash()
@@ -129,11 +139,13 @@ void CPlayerStateMachine::crash()
 	set_evaluateJump( false );
 	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
 	mc->stop();
+	UVR_INFO( "Crash!" );
 
 	auto& sound{ GET_COMPONENT_INSTANCE( CSoundManager ) };
 	sound->playSound( "assets/sandbox/sounds/bonk.wav", 1 );
 
-	UVR_INFO( "Crash!" );
+	auto& skin{ GET_COMPONENT_INSTANCE( CSkin ) };
+	skin->set_color( constants::ST_CRASH_COLOR );
 }
 
 void CPlayerStateMachine::toFloor()
@@ -142,6 +154,8 @@ void CPlayerStateMachine::toFloor()
 	set_inFloor( true );
 	set_fallEnabled( false );
 	m_timer = 1.f;
+	auto& skin{ GET_COMPONENT_INSTANCE( CSkin ) };
+	skin->set_color( constants::ST_CRASH_COLOR );
 }
 
 void CPlayerStateMachine::endCrash()
