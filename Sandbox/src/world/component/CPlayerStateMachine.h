@@ -12,10 +12,11 @@ class CPlayerStateMachine : public CStateMachine
 	void fall();
 	void crash();
 	void toFloor();
+	void endCrash();
 	bool verticalMovementCompleted();
 
 private:
-	float m_inFloorTimer;
+	float m_timer;
 
 public:
 	void init() override;
@@ -31,4 +32,5 @@ public:
 	ADD_PROPERTY( bool, crashEnabled )
 
 	ADD_PROPERTY( bool, inFloor )
+	ADD_PROPERTY( bool, inCrash )
 };

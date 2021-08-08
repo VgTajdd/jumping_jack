@@ -9,6 +9,8 @@
 
 void CPlayerStateMachine::init()
 {
+	set_inCrash( false );
+	set_inFloor( false );
 	set_evaluateJump( false );
 	set_crashEnabled( false );
 	set_fallEnabled( false );
@@ -40,7 +42,7 @@ void CPlayerStateMachine::init()
 	addEdge(
 		states::ST_JUMPING, states::ST_CRASH, [this]() { return crashEnabled(); }, [this]() { crash(); } );
 	addEdge(
-		states::ST_CRASH, states::ST_IN_FLOOR, [this]() { return true; }, [this]() { toFloor(); } );
+		states::ST_CRASH, states::ST_IN_FLOOR, [this]() { return !inCrash(); }, [this]() { toFloor(); } );
 	addEdge(
 		states::ST_IN_FLOOR, states::ST_FALLING, [this]() { return fallEnabled(); }, [this]() { fall(); } );
 	addEdge(
@@ -59,10 +61,15 @@ void CPlayerStateMachine::init()
 void CPlayerStateMachine::update( float dt )
 {
 	CStateMachine::update( dt );
-	if ( inFloor() && m_inFloorTimer > 0 )
+	if ( inFloor() && m_timer > 0 )
 	{
-		m_inFloorTimer -= dt;
-		if ( m_inFloorTimer <= 0 ) set_inFloor( false );
+		m_timer -= dt;
+		if ( m_timer <= 0 ) set_inFloor( false );
+	}
+	if ( inCrash() && m_timer > 0 )
+	{
+		m_timer -= dt;
+		if ( m_timer <= 0 ) endCrash();
 	}
 }
 
@@ -115,6 +122,8 @@ void CPlayerStateMachine::fall()
 
 void CPlayerStateMachine::crash()
 {
+	m_timer = .15f;
+	set_inCrash( true );
 	set_crashEnabled( false );
 	set_evaluateJump( false );
 	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
@@ -123,6 +132,7 @@ void CPlayerStateMachine::crash()
 	auto& position{ GET_COMPONENT_INSTANCE( CPosition ) };
 	position->set_y( constants::getPlatformHeight( stats::Stats::CURRENT_PLATFORM ) - 5 );
 	stand();
+	UVR_INFO( "Crash!" );
 }
 
 void CPlayerStateMachine::toFloor()
@@ -130,7 +140,15 @@ void CPlayerStateMachine::toFloor()
 	UVR_INFO( "ToFloor" );
 	set_inFloor( true );
 	set_fallEnabled( false );
-	m_inFloorTimer = 1;
+	m_timer = 1.f;
+}
+
+void CPlayerStateMachine::endCrash()
+{
+	set_inCrash( false );
+	auto& position{ GET_COMPONENT_INSTANCE( CPosition ) };
+	position->set_y( constants::getPlatformHeight( stats::Stats::CURRENT_PLATFORM ) - 5.f );
+	stand();
 }
 
 bool CPlayerStateMachine::verticalMovementCompleted()
