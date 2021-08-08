@@ -16,9 +16,12 @@ class Sprite;
 // Class for actors, player and objects.
 class World : public std::enable_shared_from_this<World>
 {
+	void removeActor( size_t indexInBuffer );
+
 public:
 	explicit World();
-	void init();
+	~World();
+	virtual void init();
 	void setCanvas( univer::Sprite* canvas );
 	void update( float dt );
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );

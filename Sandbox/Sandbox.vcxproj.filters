@@ -20,8 +20,12 @@
     <ClCompile Include="src\world\component\CMotionController.cpp" />
     <ClCompile Include="src\world\component\CSkin.cpp" />
     <ClCompile Include="src\world\component\CPlayerStateMachine.cpp" />
+    <ClCompile Include="src\world\jj\Hole.cpp" />
     <ClCompile Include="src\world\component\CPlayerMotionController.cpp" />
     <ClCompile Include="src\world\component\CInputManager.cpp" />
+    <ClCompile Include="src\world\jj\JJWorld.cpp" />
+    <ClCompile Include="src\world\jj\Platform.cpp" />
+    <ClCompile Include="src\world\jj\CPlatform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\resources.rc">
@@ -49,7 +53,11 @@
     <ClInclude Include="src\data\Stats.h" />
     <ClInclude Include="src\data\Constants.h" />
     <ClInclude Include="src\world\component\CPlayerStateMachine.h" />
+    <ClInclude Include="src\world\jj\Hole.h" />
     <ClInclude Include="src\world\component\CPlayerMotionController.h" />
     <ClInclude Include="src\world\component\CInputManager.h" />
+    <ClInclude Include="src\world\jj\JJWorld.h" />
+    <ClInclude Include="src\world\jj\CPlatform.h" />
+    <ClInclude Include="src\world\jj\Platform.h" />
   </ItemGroup>
 </Project>

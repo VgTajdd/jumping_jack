@@ -18,9 +18,10 @@ public:
 	void reset();
 	void update( float dt );
 
-	ADD_PROPERTY( univer::UVec4, color )
-	ADD_PROPERTY( univer::UVec2, size )
-
 private:
 	univer::Sprite* m_sprite;
+
+	ADD_PROPERTY( univer::UVec4, color )
+	ADD_PROPERTY( univer::UVec2, size )
+	ADD_PROPERTY( bool, drawLast )
 };

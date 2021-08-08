@@ -18,6 +18,9 @@ class Actor : public std::enable_shared_from_this<Actor>
 	}
 
 public:
+	// Destructor.
+	virtual ~Actor(){};
+
 	// Use this function to create components (override).
 	virtual void init(){};
 
@@ -25,6 +28,11 @@ public:
 	virtual void update( float dt )
 	{
 		updateComponents( dt );
+	}
+
+	void clearComponents()
+	{
+		m_components.clear();
 	}
 
 	void setWorld( const std::weak_ptr<World>& world )

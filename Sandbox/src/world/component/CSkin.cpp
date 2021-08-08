@@ -1,12 +1,9 @@
 #include "CSkin.h"
 #include "CPosition.h"
-
 #include "world/Actor.h"
 #include "world/World.h"
 
 #include <univer/renderables/2d/Sprite.h>
-
-DEFINE_GET_COMPONENT_INSTANCE( CPosition )
 
 CSkin::~CSkin()
 {
@@ -16,7 +13,7 @@ CSkin::~CSkin()
 void CSkin::clear()
 {
 	univer::Sprite* canvas = nullptr;
-	if ( !actor()->world().expired() ) canvas = actor()->world().lock()->canvas();
+	if ( !actor().expired() && !actor().lock()->world().expired() ) canvas = actor().lock()->world().lock()->canvas();
 
 	if ( m_sprite != nullptr )
 	{
@@ -37,7 +34,7 @@ void CSkin::reset()
 	clear();
 
 	univer::Sprite* canvas = nullptr;
-	if ( !actor()->world().expired() ) canvas = actor()->world().lock()->canvas();
+	if ( !actor().expired() && !actor().lock()->world().expired() ) canvas = actor().lock()->world().lock()->canvas();
 
 	if ( canvas != nullptr )
 	{
@@ -55,6 +52,18 @@ void CSkin::update( float dt )
 
 	if ( m_sprite != nullptr )
 	{
+		if ( drawLast() )
+		{
+			univer::Sprite* canvas = nullptr;
+			if ( !actor().expired() && !actor().lock()->world().expired() )
+				canvas = actor().lock()->world().lock()->canvas();
+
+			if ( canvas != nullptr )
+			{
+				canvas->removeChild( m_sprite, false );
+				canvas->addChild( m_sprite );
+			}
+		}
 		m_sprite->setPosition( position->x(), position->y() );
 	}
 }

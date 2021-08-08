@@ -7,6 +7,13 @@ World::World()
 	, m_canvas{ nullptr }
 {}
 
+World::~World()
+{
+	m_player->clearComponents();
+	m_player.reset();
+	m_canvas = nullptr;
+}
+
 void World::init()
 {
 	m_player->setWorld( shared_from_this() );
@@ -25,7 +32,12 @@ void World::update( float dt )
 		}
 		m_actors[i]->update( dt );
 	}
-	std::for_each( toRemove.begin(), toRemove.end(), [this]( size_t i ) { m_actors.erase( m_actors.begin() + i ); } );
+	size_t temp = 0;
+	std::for_each( toRemove.begin(), toRemove.end(), [this, &temp]( size_t i ) {
+		i = i - temp;
+		removeActor( i );
+		temp++;
+	} );
 	m_player->update( dt );
 }
 
@@ -42,4 +54,13 @@ void World::onKeyReleasedEvent( univer::KeyReleasedEvent& e )
 void World::addActor( const std::shared_ptr<Actor>& actor )
 {
 	m_actors.push_back( actor );
+	actor->setWorld( shared_from_this() );
+	actor->init();
+}
+
+void World::removeActor( size_t indexInBuffer )
+{
+	m_actors[indexInBuffer]->clearComponents();
+	m_actors[indexInBuffer].reset();
+	m_actors.erase( m_actors.begin() + indexInBuffer );
 }

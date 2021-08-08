@@ -1,9 +1,6 @@
 #include "CInputManager.h"
 #include "CPlayerStateMachine.h"
-
 #include "world/Actor.h"
-
-DEFINE_GET_COMPONENT_INSTANCE( CPlayerStateMachine )
 
 void CInputManager::processKeyInput( const univer::KeyCode& keyCode, bool pressed )
 {

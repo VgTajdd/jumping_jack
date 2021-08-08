@@ -4,8 +4,6 @@
 #include "data/Constants.h"
 #include "world/Actor.h"
 
-DEFINE_GET_COMPONENT_INSTANCE( CPosition )
-
 void CPlayerMotionController::moveToLeft( bool on )
 {
 	m_motionFactorX = on ? -1 : 0;

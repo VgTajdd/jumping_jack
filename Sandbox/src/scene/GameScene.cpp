@@ -1,8 +1,10 @@
 #include "GameScene.h"
 #include "SceneType.h"
 
+#include "world/jj/JJWorld.h"
+
 GameScene::GameScene()
-	: m_world{ std::make_shared<World>() }
+	: m_world{ std::make_shared<JJWorld>() }
 {
 	m_type = SCENE_TYPE::GAME;
 }
@@ -16,11 +18,6 @@ void GameScene::init()
 {
 	m_world->setCanvas( m_canvas );
 	m_world->init();
-}
-
-GameScene::~GameScene()
-{
-	m_world.reset();
 }
 
 void GameScene::onKeyPressedEvent( univer::KeyPressedEvent& e )

@@ -1,11 +1,8 @@
 #include "CPlayerStateMachine.h"
 #include "CPlayerMotionController.h"
-
-#include <univer/core/Log.h>
-
 #include "world/Actor.h"
 
-DEFINE_GET_COMPONENT_INSTANCE( CPlayerMotionController )
+#include <univer/core/Log.h>
 
 void CPlayerStateMachine::init()
 {

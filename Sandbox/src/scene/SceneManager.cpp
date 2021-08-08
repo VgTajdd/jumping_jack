@@ -44,7 +44,6 @@ void SceneManager::clear()
 	if ( m_currentScene != nullptr ) delete m_currentScene;
 
 	m_layer->remove( m_canvas );
-	delete m_canvas;
 	m_canvas = nullptr;
 }
 
