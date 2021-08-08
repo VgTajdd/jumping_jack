@@ -20,8 +20,9 @@ class World : public std::enable_shared_from_this<World>
 
 public:
 	explicit World();
-	~World();
+	virtual ~World(){};
 	virtual void init();
+	void clear();
 	void setCanvas( univer::Sprite* canvas );
 	void update( float dt );
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );

@@ -9,6 +9,7 @@ class CSoundManager : public Component
 	void update( float dt ) override;
 
 public:
+	~CSoundManager();
 	void playSound( const char* path, float time );
 
 private:

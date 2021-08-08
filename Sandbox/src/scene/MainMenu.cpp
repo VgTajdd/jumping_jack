@@ -2,6 +2,8 @@
 #include "SceneManager.h"
 #include "SceneType.h"
 
+#include "data/Stats.h"
+
 #include <Univer.h>
 #include <univer/renderables/2d/Sprite.h>
 #include <univer/utils/Timestep.h>
@@ -28,13 +30,15 @@ void MainMenu::update( float dt )
 
 	if ( m_timeElapsed > 5.0f )
 	{
-		SceneManager::Get()->gotoScene( SCENE_TYPE::GAME );
+		SceneManager::Get()->setNextScene( SCENE_TYPE::GAME );
 	}
 	m_timeElapsed += dt;
 }
 
 void MainMenu::init()
 {
+	stats::Stats::resetStats();
+
 	float position1[3] = { 0, 0, 0 };
 	UAudio::Get()->playSound( "assets/sandbox/sounds/Interface.mid", position1, UAudio::Get()->volumeTodB( 1.0f ) );
 

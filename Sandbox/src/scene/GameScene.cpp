@@ -9,6 +9,11 @@ GameScene::GameScene()
 	m_type = SCENE_TYPE::GAME;
 }
 
+GameScene::~GameScene()
+{
+	m_world->clear();
+}
+
 void GameScene::update( float dt )
 {
 	m_world->update( dt );

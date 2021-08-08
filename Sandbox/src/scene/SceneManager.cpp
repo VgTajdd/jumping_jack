@@ -18,6 +18,7 @@ SceneManager::SceneManager()
 	: m_currentScene( nullptr )
 	, m_canvas( nullptr )
 	, m_layer( nullptr )
+	, m_nextScene( SCENE_TYPE::NONE )
 {}
 
 void SceneManager::gotoScene( SCENE_TYPE type )
@@ -36,6 +37,11 @@ void SceneManager::update( univer::Timestep ts )
 	if ( m_currentScene )
 	{
 		m_currentScene->update( ts );
+	}
+	if ( m_nextScene != SCENE_TYPE::NONE )
+	{
+		gotoScene( m_nextScene );
+		m_nextScene = SCENE_TYPE::NONE;
 	}
 }
 
@@ -64,4 +70,9 @@ void SceneManager::onKeyPressedEvent( univer::KeyPressedEvent& e )
 void SceneManager::onKeyReleasedEvent( univer::KeyReleasedEvent& e )
 {
 	m_currentScene->onKeyReleasedEvent( e );
+}
+
+void SceneManager::setNextScene( SCENE_TYPE type )
+{
+	m_nextScene = type;
 }

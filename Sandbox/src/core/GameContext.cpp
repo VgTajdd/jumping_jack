@@ -19,7 +19,7 @@ void GameContext::init( univer::Layer* layer )
 
 	SceneManager::Get()->setLayer( layer );
 	SceneManager::Get()->init();
-	SceneManager::Get()->gotoScene( SCENE_TYPE::MAIN_MENU );
+	SceneManager::Get()->setNextScene( SCENE_TYPE::MAIN_MENU );
 }
 
 void GameContext::clear( univer::Layer* layer )

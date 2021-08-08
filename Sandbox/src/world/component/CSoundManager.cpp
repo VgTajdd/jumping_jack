@@ -16,6 +16,14 @@ void CSoundManager::update( float dt )
 	}
 }
 
+CSoundManager::~CSoundManager()
+{
+	for ( auto& [channelId, time] : m_temporalChannels )
+	{
+		UAudio::Get()->stopChannel( channelId, 500 );
+	}
+}
+
 void CSoundManager::playSound( const char* path, float time )
 {
 	float pos[3] = { 0, 0, 0 };

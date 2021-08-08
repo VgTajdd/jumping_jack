@@ -7,17 +7,22 @@ World::World()
 	, m_canvas{ nullptr }
 {}
 
-World::~World()
-{
-	m_player->clearComponents();
-	m_player.reset();
-	m_canvas = nullptr;
-}
-
 void World::init()
 {
 	m_player->setWorld( shared_from_this() );
 	m_player->init();
+}
+
+void World::clear()
+{
+	for ( const auto& actor : m_actors )
+	{
+		actor->clearComponents();
+	}
+	m_actors.clear();
+	m_player->clearComponents();
+	m_player.reset();
+	m_canvas = nullptr;
 }
 
 void World::update( float dt )

@@ -15,6 +15,7 @@ class GameScene : public Scene
 {
 public:
 	explicit GameScene();
+	~GameScene();
 	void init();
 	void update( float dt );
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );
