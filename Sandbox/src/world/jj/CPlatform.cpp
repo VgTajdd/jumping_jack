@@ -7,6 +7,7 @@
 #include "world/component/CMotionController.h"
 #include "world/component/CPlayerStateMachine.h"
 #include "world/component/CPosition.h"
+#include "world/component/CSoundManager.h"
 
 #include <univer/core/Log.h>
 #include <univer/core/URectangle.h>
@@ -55,6 +56,7 @@ void CPlatform::update( float dt )
 		const auto& world{ actor().lock()->world().lock() };
 		auto& p_collision{ world->player()->getComponent<CCollision>() };
 		auto& p_position{ world->player()->getComponent<CPosition>() };
+		auto& sound{ world->player()->getComponent<CSoundManager>() };
 		auto& sm{ world->player()->getComponent<CPlayerStateMachine>() };
 		auto p_bounds{ univer::URectangle::move( p_collision->bounds(), { p_position->x(), p_position->y() } ) };
 
@@ -103,6 +105,7 @@ void CPlatform::update( float dt )
 					if ( bounds.contains( p1 ) && bounds.contains( p2 ) )
 					{
 						sm->set_fallEnabled( true );
+						sound->playSound( "assets/sandbox/sounds/fall.wav", 1.f );
 					}
 				}
 			}
@@ -115,6 +118,7 @@ void CPlatform::update( float dt )
 				if ( passedHoles > 0 )
 				{
 					UVR_TRACE( "Successful Jump!" );
+					sound->playSound( "assets/sandbox/sounds/successful_jump.mp3", 0.8f );
 					sm->set_evaluateJump( false );
 				}
 				else

@@ -1,6 +1,7 @@
 #include "CPlayerStateMachine.h"
 #include "CPlayerMotionController.h"
 #include "CPosition.h"
+#include "CSoundManager.h"
 #include "data/Constants.h"
 #include "data/Stats.h"
 #include "world/Actor.h"
@@ -129,9 +130,9 @@ void CPlayerStateMachine::crash()
 	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
 	mc->stop();
 
-	auto& position{ GET_COMPONENT_INSTANCE( CPosition ) };
-	position->set_y( constants::getPlatformHeight( stats::Stats::CURRENT_PLATFORM ) - 5 );
-	stand();
+	auto& sound{ GET_COMPONENT_INSTANCE( CSoundManager ) };
+	sound->playSound( "assets/sandbox/sounds/bonk.wav", 1 );
+
 	UVR_INFO( "Crash!" );
 }
 

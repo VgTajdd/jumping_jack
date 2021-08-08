@@ -27,6 +27,7 @@
     <ClCompile Include="src\world\jj\Platform.cpp" />
     <ClCompile Include="src\world\jj\CPlatform.cpp" />
     <ClCompile Include="src\data\Stats.cpp" />
+    <ClCompile Include="src\world\component\CSoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\resources.rc">
@@ -60,5 +61,6 @@
     <ClInclude Include="src\world\jj\JJWorld.h" />
     <ClInclude Include="src\world\jj\CPlatform.h" />
     <ClInclude Include="src\world\jj\Platform.h" />
+    <ClInclude Include="src\world\component\CSoundManager.h" />
   </ItemGroup>
 </Project>

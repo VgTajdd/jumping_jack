@@ -5,6 +5,7 @@
 #include "component/CPlayerStateMachine.h"
 #include "component/CPosition.h"
 #include "component/CSkin.h"
+#include "component/CSoundManager.h"
 #include "data/Constants.h"
 
 #include <univer/events/KeyEvent.h>
@@ -20,6 +21,7 @@ void Player::init()
 	auto& collision{ addComponent<CCollision>() };
 	auto& sm{ addComponent<CPlayerStateMachine>() };
 	auto& im{ addComponent<CInputManager>() };
+	auto& sound{ addComponent<CSoundManager>() };
 
 	// Setup components.
 	mc->set_speedX( constants::PLAYER_SPEED_X );
