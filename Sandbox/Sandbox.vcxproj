@@ -66,6 +66,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\world\jj\Enemy.cpp" />
     <ClCompile Include="src\world\component\CDynamicSkin2.cpp" />
     <ClCompile Include="src\world\component\CSoundManager.cpp" />
     <ClCompile Include="src\data\Stats.cpp" />
@@ -91,6 +92,7 @@
     <ResourceCompile Include="resources\resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\world\jj\Enemy.h" />
     <ClInclude Include="src\world\component\CDynamicSkin2.h" />
     <ClInclude Include="src\world\component\CSoundManager.h" />
     <ClInclude Include="src\world\jj\Platform.h" />
