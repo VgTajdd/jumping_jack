@@ -5,7 +5,7 @@
 namespace constants
 {
 // Game constants.
-const unsigned int TOTAL_LEVELS = 15;
+const unsigned int TOTAL_LEVELS = 20;
 const unsigned int INITIAL_LIFES = 6;
 const unsigned int TOTAL_PLATFORMS = 8;
 const unsigned int COMPLETE_JUMP_SCORE = 5;

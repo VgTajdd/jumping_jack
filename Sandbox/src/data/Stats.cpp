@@ -40,7 +40,7 @@ void Stats::completeJump()
 	Stats::CURRENT_PLATFORM++;
 	Stats::SCORE += constants::COMPLETE_JUMP_SCORE;
 	JJWorld::Get()->setScore( SCORE );
-	if ( Stats::CURRENT_PLATFORM == constants::TOTAL_PLATFORMS )
+	if ( Stats::CURRENT_PLATFORM > constants::TOTAL_PLATFORMS )
 	{
 		onNextLevel();
 	}

@@ -16,7 +16,7 @@ void Platform::init()
 
 	float randomValue{ univer::Random::GetInstance().value() };
 	p->set_evaluationTime( 1.f + randomValue );
-	p->set_probFirstHole( 0.3f );
+	p->set_probFirstHole( 0.5f );
 	p->set_probSecondHole( 0.15f );
 	p->set_level( m_level );
 	p->set_evaluationTimeEnemy( 3.f + randomValue );
