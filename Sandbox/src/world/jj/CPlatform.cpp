@@ -102,6 +102,7 @@ void CPlatform::update( float dt )
 		{
 			UVR_TRACE( "Collide with Enemy" );
 			sm->set_collideWithEnemy( true );
+			sound->playSound( "assets/sandbox/sounds/Kill.wav", .4f, .4f );
 		}
 	}
 
@@ -166,7 +167,7 @@ void CPlatform::update( float dt )
 				if ( passedHoles > 0 )
 				{
 					UVR_TRACE( "Successful Jump!" );
-					sound->playSound( "assets/sandbox/sounds/successful_jump.mp3", .4f, .4f );
+					sound->playSound( "assets/sandbox/sounds/Jump.wav", .4f, .4f );
 					sm->set_evaluateJump( false );
 				}
 				else

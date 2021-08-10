@@ -5,5 +5,7 @@ assets/sandbox/spritesheets/atlas.png|1
 assets/sandbox/spritesheets/atlas.xml|0
 assets/sandbox/sounds/Interface.mid|2
 assets/sandbox/sounds/bonk.wav|2
-assets/sandbox/sounds/successful_jump.mp3|2
+assets/sandbox/sounds/Jump.wav|2
 assets/sandbox/sounds/fall.wav|2
+assets/sandbox/sounds/Kill.wav|2
+assets/sandbox/sounds/Run.wav|2
