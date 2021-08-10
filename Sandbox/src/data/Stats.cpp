@@ -24,7 +24,15 @@ void Stats::onNextLevel()
 {
 	Stats::LEVEL++;
 	Stats::CURRENT_PLATFORM = 0;
-	SceneManager::Get()->setNextScene( SCENE_TYPE::GAME );
+	if ( LEVEL > constants::TOTAL_LEVELS )
+	{
+		// Win Game.
+		SceneManager::Get()->setNextScene( SCENE_TYPE::MAIN_MENU );
+	}
+	else
+	{
+		SceneManager::Get()->setNextScene( SCENE_TYPE::GAME );
+	}
 }
 
 void Stats::completeJump()
@@ -46,6 +54,7 @@ void Stats::fall()
 	if ( Stats::LIFES == 0 )
 	{
 		// Game Over.
+		SceneManager::Get()->setNextScene( SCENE_TYPE::MAIN_MENU );
 	}
 }
 
