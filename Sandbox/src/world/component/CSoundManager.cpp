@@ -10,8 +10,9 @@ void CSoundManager::update( float dt )
 		time -= dt;
 		if ( time <= 0 )
 		{
-			UAudio::Get()->stopChannel( channelId, 0 );
+			UAudio::Get()->stopChannel( channelId, m_fadeTimes[channelId] * 1000 );
 			m_temporalChannels.erase( channelId );
+			m_fadeTimes.erase( channelId );
 		}
 	}
 }
@@ -24,9 +25,10 @@ CSoundManager::~CSoundManager()
 	}
 }
 
-void CSoundManager::playSound( const char* path, float time )
+void CSoundManager::playSound( const char* path, float time, float fadeTime )
 {
 	float pos[3] = { 0, 0, 0 };
-	auto channel = UAudio::Get()->playSound( path, pos, UAudio::Get()->volumeTodB( 1.0f ) );
-	m_temporalChannels[channel] = time;
+	auto channelId = UAudio::Get()->playSound( path, pos, UAudio::Get()->volumeTodB( 1.0f ) );
+	m_temporalChannels[channelId] = time;
+	m_fadeTimes[channelId] = fadeTime;
 }

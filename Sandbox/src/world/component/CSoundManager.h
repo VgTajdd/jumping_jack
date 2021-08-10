@@ -10,8 +10,9 @@ class CSoundManager : public Component
 
 public:
 	~CSoundManager();
-	void playSound( const char* path, float time );
+	void playSound( const char* path, float time, float fadeTime = 0.f );
 
 private:
 	std::map<int, float> m_temporalChannels;
+	std::map<int, float> m_fadeTimes;
 };

@@ -105,7 +105,7 @@ void CPlatform::update( float dt )
 					if ( bounds.contains( p1 ) && bounds.contains( p2 ) )
 					{
 						sm->set_fallEnabled( true );
-						sound->playSound( "assets/sandbox/sounds/fall.wav", 1.f );
+						sound->playSound( "assets/sandbox/sounds/fall.wav", .3f, .3f );
 					}
 				}
 			}
@@ -118,7 +118,7 @@ void CPlatform::update( float dt )
 				if ( passedHoles > 0 )
 				{
 					UVR_TRACE( "Successful Jump!" );
-					sound->playSound( "assets/sandbox/sounds/successful_jump.mp3", 0.8f );
+					sound->playSound( "assets/sandbox/sounds/successful_jump.mp3", .4f, .4f );
 					sm->set_evaluateJump( false );
 				}
 				else
