@@ -22,7 +22,7 @@ public:
 	explicit World();
 	virtual ~World(){};
 	virtual void init();
-	void clear();
+	virtual void clear();
 	void setCanvas( univer::Sprite* canvas );
 	void update( float dt );
 	void onKeyPressedEvent( univer::KeyPressedEvent& e );
