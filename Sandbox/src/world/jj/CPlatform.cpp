@@ -3,6 +3,7 @@
 #include "data/Constants.h"
 #include "data/Stats.h"
 #include "world/World.h"
+#include "world/actor/Enemy.h"
 #include "world/component/CCollision.h"
 #include "world/component/CMotionController.h"
 #include "world/component/CPlayerStateMachine.h"
@@ -31,6 +32,21 @@ void CPlatform::update( float dt )
 		m_time = 0;
 	}
 
+	// Create enemies.
+	m_timeEnemies += dt;
+	if ( m_timeEnemies >= evaluationTimeEnemy() && m_level <= 7 )
+	{
+		float randomValue1{ univer::Random::GetInstance().value() };
+		if ( m_enemies.empty() && randomValue1 < m_probEnemy )
+		{
+			float randomValue2{ univer::Random::GetInstance().value() };
+			float speed{ constants::PLAYER_SPEED_X };
+			createEnemy( randomValue2 > 0.5 ? speed : -speed, level() );
+			set_evaluationTime( 3.f + randomValue2 );
+		}
+		m_timeEnemies = 0;
+	}
+
 	// Remove holes.
 	for ( size_t i = 0; i < m_holes.size(); i++ )
 	{
@@ -50,16 +66,48 @@ void CPlatform::update( float dt )
 		}
 	}
 
+	// Remove enemies.
+	for ( size_t i = 0; i < m_enemies.size(); i++ )
+	{
+		if ( m_enemies[i].expired() )
+		{
+			m_enemies.erase( m_enemies.begin() + i );
+			i--;
+			continue;
+		}
+
+		if ( !m_enemies[i].expired() &&
+			 m_enemies[i].lock()->getComponent<CMotionController>()->horizontalMovementCompleted() )
+		{
+			m_enemies[i].lock()->setValid( false );
+			m_enemies.erase( m_enemies.begin() + i );
+			i--;
+		}
+	}
+
+	const auto& world{ actor().lock()->world().lock() };
+	auto& p_collision{ world->player()->getComponent<CCollision>() };
+	auto& p_position{ world->player()->getComponent<CPosition>() };
+	auto& sound{ world->player()->getComponent<CSoundManager>() };
+	auto& sm{ world->player()->getComponent<CPlayerStateMachine>() };
+	auto p_bounds{ univer::URectangle::move( p_collision->bounds(), { p_position->x(), p_position->y() } ) };
+
+	if ( !m_enemies.empty() && stats::Stats::CURRENT_PLATFORM == m_level )
+	{
+		auto& collision{ m_enemies[0].lock()->getComponent<CCollision>() };
+		auto& position{ m_enemies[0].lock()->getComponent<CPosition>() };
+		auto bounds{ univer::URectangle::move( collision->bounds(), { position->x(), position->y() } ) };
+
+		if ( p_bounds.intersetcts( bounds ) && !sm->inFloor() )
+		{
+			UVR_TRACE( "Collide with Enemy" );
+			sm->set_collideWithEnemy( true );
+		}
+	}
+
 	// Jump/Fall logic.
 	if ( stats::Stats::CURRENT_PLATFORM + 1 == m_level || stats::Stats::CURRENT_PLATFORM == m_level )
 	{
-		const auto& world{ actor().lock()->world().lock() };
-		auto& p_collision{ world->player()->getComponent<CCollision>() };
-		auto& p_position{ world->player()->getComponent<CPosition>() };
-		auto& sound{ world->player()->getComponent<CSoundManager>() };
-		auto& sm{ world->player()->getComponent<CPlayerStateMachine>() };
-		auto p_bounds{ univer::URectangle::move( p_collision->bounds(), { p_position->x(), p_position->y() } ) };
-
 		auto& pl_collision{ actor().lock()->getComponent<CCollision>() };
 		bool collidedWithPlatform{ false };
 		size_t passedHoles{ 0 };
@@ -140,4 +188,15 @@ void CPlatform::createHole( float speedX, int platformLevel )
 		world->addActor( hole );
 	}
 	m_holes.emplace_back( hole );
+}
+
+void CPlatform::createEnemy( float speedX, int platformLevel )
+{
+	auto enemy{ std::make_shared<Enemy>( speedX, platformLevel ) };
+	if ( !actor().expired() && !actor().lock()->world().expired() )
+	{
+		const auto& world = actor().lock()->world().lock();
+		world->addActor( enemy );
+	}
+	m_enemies.emplace_back( enemy );
 }

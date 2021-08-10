@@ -33,4 +33,6 @@ public:
 
 	ADD_PROPERTY( bool, inFloor )
 	ADD_PROPERTY( bool, inCrash )
+
+	ADD_PROPERTY( bool, collideWithEnemy )
 };

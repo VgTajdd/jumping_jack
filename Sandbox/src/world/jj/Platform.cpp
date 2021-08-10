@@ -19,6 +19,8 @@ void Platform::init()
 	p->set_probFirstHole( 0.3f );
 	p->set_probSecondHole( 0.15f );
 	p->set_level( m_level );
+	p->set_evaluationTimeEnemy( 3.f + randomValue );
+	p->set_probEnemy( .1f );
 	position->set_y( (float)constants::getPlatformHeight( m_level ) );
 	position->set_x( constants::SCREEN_WIDTH / 2 );
 	skin->set_color( { 0.3f, 0.3f, 1.f, 1.f } );

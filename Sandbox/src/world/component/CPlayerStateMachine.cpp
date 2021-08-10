@@ -11,6 +11,7 @@
 
 void CPlayerStateMachine::init()
 {
+	set_collideWithEnemy( false );
 	set_inCrash( false );
 	set_inFloor( false );
 	set_evaluateJump( false );
@@ -23,7 +24,7 @@ void CPlayerStateMachine::init()
 	set_state( states::ST_STAND );
 	stand();
 
-	// Walk-Stand
+	// Walk-Stand.
 	addEdge(
 		states::ST_STAND, states::ST_WALK, [this]() { return moveToRightEnabled() || moveToLeftEnabled(); },
 		[this]() { walk(); } );
@@ -32,6 +33,12 @@ void CPlayerStateMachine::init()
 		[this]() { return !moveToRightEnabled() && !moveToLeftEnabled() && !jumpEnabled(); }, [this]() { stand(); } );
 	addEdge(
 		states::ST_WALK, states::ST_WALK, [this]() { return flipEnabled(); }, [this]() { walk(); } );
+
+	// Enemy collision.
+	addEdge(
+		states::ST_STAND, states::ST_IN_FLOOR, [this]() { return collideWithEnemy(); }, [this]() { toFloor(); } );
+	addEdge(
+		states::ST_WALK, states::ST_IN_FLOOR, [this]() { return collideWithEnemy(); }, [this]() { toFloor(); } );
 
 	// Jump.
 	addEdge(
@@ -91,6 +98,7 @@ void CPlayerStateMachine::walk()
 
 void CPlayerStateMachine::stand()
 {
+	set_collideWithEnemy( false );
 	set_jumpEnabled( false );
 	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
 	mc->moveToLeft( false );
@@ -151,6 +159,11 @@ void CPlayerStateMachine::crash()
 void CPlayerStateMachine::toFloor()
 {
 	UVR_INFO( "ToFloor" );
+	set_collideWithEnemy( false );
+	auto& mc{ GET_COMPONENT_INSTANCE( CPlayerMotionController ) };
+	mc->moveToLeft( false );
+	mc->moveToRight( false );
+
 	set_inFloor( true );
 	set_fallEnabled( false );
 	m_timer = 1.f;
