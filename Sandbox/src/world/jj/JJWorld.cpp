@@ -1,3 +1,9 @@
+// ========================================================================= //
+// Copyright (c) 2021 Agustin Jesus Durand Diaz.                             //
+// This code is licensed under the Apache License 2.0.                       //
+// JJWorld.cpp                                                               //
+// ========================================================================= //
+
 #include "JJWorld.h"
 #include "Platform.h"
 #include "data/Constants.h"

@@ -1,3 +1,9 @@
+// ========================================================================= //
+// Copyright (c) 2021 Agustin Jesus Durand Diaz.                             //
+// This code is licensed under the Apache License 2.0.                       //
+// CDynamicSkin2.cpp                                                         //
+// ========================================================================= //
+
 #include "CDynamicSkin2.h"
 
 #include <univer/renderables/2d/Sprite.h>

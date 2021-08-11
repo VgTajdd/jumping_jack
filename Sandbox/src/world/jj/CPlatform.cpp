@@ -1,3 +1,9 @@
+// ========================================================================= //
+// Copyright (c) 2021 Agustin Jesus Durand Diaz.                             //
+// This code is licensed under the Apache License 2.0.                       //
+// CPlatform.cpp                                                             //
+// ========================================================================= //
+
 #include "CPlatform.h"
 #include "Enemy.h"
 #include "Hole.h"

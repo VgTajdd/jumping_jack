@@ -1,3 +1,9 @@
+// ========================================================================= //
+// Copyright (c) 2021 Agustin Jesus Durand Diaz.                             //
+// This code is licensed under the Apache License 2.0.                       //
+// Stats.cpp                                                                 //
+// ========================================================================= //
+
 #include "Stats.h"
 #include "Constants.h"
 #include "scene/SceneManager.h"

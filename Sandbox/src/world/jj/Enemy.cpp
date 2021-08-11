@@ -1,3 +1,9 @@
+// ========================================================================= //
+// Copyright (c) 2021 Agustin Jesus Durand Diaz.                             //
+// This code is licensed under the Apache License 2.0.                       //
+// Enemy.cpp                                                                 //
+// ========================================================================= //
+
 #include "Enemy.h"
 #include "data/Constants.h"
 #include "world/component/CCollision.h"

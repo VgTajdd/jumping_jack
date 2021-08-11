@@ -1,3 +1,9 @@
+// ========================================================================= //
+// Copyright (c) 2021 Agustin Jesus Durand Diaz.                             //
+// This code is licensed under the Apache License 2.0.                       //
+// SceneManager.cpp                                                          //
+// ========================================================================= //
+
 #include "SceneManager.h"
 #include "Scene.h"
 #include "SceneFactory.h"
